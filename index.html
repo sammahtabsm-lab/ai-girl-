@@ -3,57 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Pixel Companion - Full Pro</title>
+    <title>AI Pixel Companion</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <h2>هوش مصنوعی پیکسلی من</h2>
         <div class="nav-btns">
-            <button onclick="switchMode('live')">لایو صوتی</button>
-            <button onclick="switchMode('chat')">چت متنی</button>
+            <button onclick="switchMode('live')">حالت لایو</button>
+            <button onclick="switchMode('chat')">حالت چت</button>
             <button onclick="openSettings()">تنظیمات</button>
         </div>
     </header>
 
     <div class="main-container">
-        <!-- حالت لایو (انیمیشن + صوت + دوربین) -->
+        <!-- کاراکتر و انیمیشن (همیشه در بالای صفحه حضور دارد و حرکت می‌کند) -->
         <div id="character-stage">
-            <video id="webcam" autoplay playsinline style="display:none; width:120px; position:absolute; top:10px; right:10px; border-radius:8px; border:2px solid #e94560;"></video>
+            <video id="webcam" autoplay playsinline style="display:none; width:90px; position:absolute; top:10px; right:10px; border-radius:6px; border:2px solid #e94560;"></video>
             <img id="character-sprite" src="idle.png" class="anim-idle" alt="Character">
-            <div id="subtitle-box">سلام! خوشحالم که دوباره می‌بینمت. امروز چه کار کنیم؟</div>
-            <button onclick="toggleVoiceLive()" id="mic-btn">شروع صحبت صوتی</button>
+            <div id="subtitle-box">سلام! آماده‌ام تا با هم صحبت کنیم.</div>
+            <button onclick="toggleVoiceLive()" id="mic-btn">صدا 🎙️</button>
         </div>
 
-        <!-- حالت چت متنی -->
-        <div id="chat-section" style="display: none;">
-            <div id="chat-messages">
-                <div class="message ai">سلام! من آماده‌ام تا با هم چت کنیم یا به کارهات برسم.</div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="user-input" placeholder="پیام خود را بنویسید...">
-                <button onclick="sendChatMessage()">ارسال</button>
+        <!-- بخش پایین: تغییر بین چت متنی یا حالت لایو صوتی -->
+        <div id="content-section">
+            <div id="chat-section" style="display: flex; flex-direction: column; height: 100%;">
+                <div id="chat-messages">
+                    <div class="message ai">سلام! هر چه دوست داری بگو تا با هم چت کنیم.</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="پیام خود را بنویسید...">
+                    <button onclick="sendChatMessage()">ارسال</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- تنظیمات پیشرفته -->
-    <div id="settings-modal" style="display: none;">
+    <!-- تنظیمات -->
+    <div id="settings-modal">
         <div class="modal-content">
             <h3>تنظیمات پیشرفته هوش مصنوعی</h3>
-            <label>کلید API جمنای (Gemini API Key):</label>
+            <label>کلید API جمنای:</label>
             <input type="text" id="set-api-key" placeholder="AIzaSy...">
             
-            <label>زمان بررسی خودکار (پروکتیو - دقیقه):</label>
+            <label>زمان بررسی خودکار (دقیقه):</label>
             <input type="number" id="set-timer" value="10">
 
-            <label>زبان پاسخ و زیرنویس:</label>
-            <select id="set-lang">
-                <option value="fa">فارسی</option>
-                <option value="en">انگلیسی</option>
-            </select>
-
-            <label>دوربین (برای دیدن چهره شما در لایو):</label>
+            <label>دوربین (تشخیص چهره):</label>
             <select id="set-camera" onchange="toggleCameraStream()">
                 <option value="off">خاموش</option>
                 <option value="on">روشن</option>
